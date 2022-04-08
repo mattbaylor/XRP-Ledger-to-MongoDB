@@ -3,7 +3,7 @@
 echo "Starting in 1 minute..."
 
 sleep 60
-cd /ledger/ 
+cd /opt/XRP-Ledger-to-MongoDB/ 
 
 while true; do 
   node account_data.js 2>&1 > account_data.log && \

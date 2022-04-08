@@ -3,7 +3,7 @@
 echo "Starting in 5 minutes..."
 
 sleep 300
-cd /ledger/ 
+cd /opt/XRP-Ledger-to-MongoDB/ 
 
 while true; do 
   node escrow_data.js 2>&1 > escrow_data.log && \
