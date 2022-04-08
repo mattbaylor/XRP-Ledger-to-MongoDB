@@ -1,5 +1,5 @@
 const WebSocket = require('ws')
-const ws = new WebSocket('wss://s1.ripple.com')
+const ws = new WebSocket('wss://xrplcluster.com')
 
 function send (r) {
 }
