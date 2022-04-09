@@ -1,7 +1,7 @@
 const fileSystem = require('fs')
 const JSONStream = require('JSONStream')
 const WebSocket = require('ws')
-const ws = new WebSocket('ws://127.0.0.1')
+const ws = new WebSocket('wss://xrplcluster.com')
 const MongoClient = require('mongodb').MongoClient
 const express = require('express')
 const fetch = require('node-fetch')
@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(allowCrossDomain)
 
-var port = process.env.PORT || 4000
+var port = process.env.PORT || 80
 
 var db = null
 var mongo = null
@@ -72,7 +72,7 @@ router.route('/escrowlist').get(function(req, res) {
 })
 
 router.route('/prtg').get(function(req, res) {
-    fetch('https://ledger.exposed/api/richlist').then((r) => {
+    fetch('http://xrpl.procoinnews.com:8000/api/richlist').then((r) => {
         return r.json()
     }).then((r) => {
         let output = { prtg: { result: [] } }
@@ -388,8 +388,8 @@ router.route('/richlist').get(function(req, res) {
       ]).toArray(function(error, d) {
         responded++
         response.has[f] = {
-          accounts: d[0].count,
-          balanceSum: d[0].balanceSum,
+          accounts: 0,//d[0].count,
+          balanceSum: 0,//d[0].balanceSum,
         }
         sendResponse()
       })
@@ -501,7 +501,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017', function(err, client) {
   db = client.db('ripple')
   collection = db.collection('account')
 
-  app.listen(port)
+  app.listen(port, '0.0.0.0')
   console.log('API magic happens on port', port)
 })
 

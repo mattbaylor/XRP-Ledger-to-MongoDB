@@ -3,7 +3,7 @@
 echo "Starting..."
 
 sleep 5
-cd /ledger/server/
+cd /opt/XRP-Ledger-to-MongoDB/server/
 
 while true; do 
   node index.js 2>&1 > index.log && \
