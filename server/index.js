@@ -283,46 +283,46 @@ router.route('/richlist').get(function(req, res) {
     datamoment: '',
     totalCoins: parseInt(ledger.result.closed.ledger.total_coins),
     has: {
-      has1000000000: null,
-      has500000000: null,
-      has100000000: null,
-      has20000000: null,
-      has10000000: null,
-      has5000000: null,
-      has4000000: null,
-      has3000000: null,
-      has2000000: null,
-      has1000000: null,
-      has900000: null,
-      has800000: null,
-      has700000: null,
-      has600000: null,
-      has500000: null,
-      has400000: null,
-      has300000: null,
-      has200000: null,
-      has100000: null,
-      has75000: null,
-      has50000: null,
-      has25000: null,
-      has10000: null,
-      has5000: null,
-      has1000: null,
-      has500: null,
-      has20: null,
-      has0: null
+      has1000000000: {},
+      has500000000: {},
+      has100000000: {},
+      has20000000: {},
+      has10000000: {},
+      has5000000: {},
+      has4000000: {},
+      has3000000: {},
+      has2000000: {},
+      has1000000: {},
+      has900000: {},
+      has800000: {},
+      has700000: {},
+      has600000: {},
+      has500000: {},
+      has400000: {},
+      has300000: {},
+      has200000: {},
+      has100000: {},
+      has75000: {},
+      has50000: {},
+      has25000: {},
+      has10000: {},
+      has5000: {},
+      has1000: {},
+      has500: {},
+      has20: {},
+      has0: {}
     },
     pct: {
-      pct0p01: null,
-      pct0p1: null,
-      pct0p2: null,
-      pct0p5: null,
-      pct1: null,
-      pct2: null,
-      pct3: null,
-      pct4: null,
-      pct5: null,
-      pct10: null
+      pct0p01: {},
+      pct0p1: {},
+      pct0p2: {},
+      pct0p5: {},
+      pct1: {},
+      pct2: {},
+      pct3: {},
+      pct4: {},
+      pct5: {},
+      pct10: {}
     }
   }
   var responseTimeout = setTimeout(() => {
@@ -340,7 +340,7 @@ router.route('/richlist').get(function(req, res) {
   }
 
   requested++
-  collection.count({}, function(error, numOfDocs) {
+  collection.countDocuments({}, function(error, numOfDocs) {
     responded++
     response.accounts = numOfDocs
 
@@ -387,9 +387,12 @@ router.route('/richlist').get(function(req, res) {
         } }
       ]).toArray(function(error, d) {
         responded++
-        response.has[f] = {
-          accounts: 0,//d[0].count,
-          balanceSum: 0,//d[0].balanceSum,
+        if(d && d[0])
+        {
+          response.has[f] = {
+            accounts: d[0].count,
+            balanceSum: d[0].balanceSum,
+        }
         }
         sendResponse()
       })
